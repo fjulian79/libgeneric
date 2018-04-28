@@ -102,6 +102,30 @@ size_t Fifo::put(const void *c)
     return tmp;
 }
 
+size_t Fifo::get(void *buf)
+{
+    size_t siz = min(siz, getUsed());
+
+    if (siz == 0)
+        goto out;
+
+    *((char*)buf) = pData[Tail];
+    Tail++;
+
+    if (Tail == Size)
+    {
+        Tail = 0;
+    }
+    else if (Tail == Head)
+    {
+        Head = 0;
+        Tail = 0;
+    }
+
+    out:
+    return siz;
+}
+
 size_t Fifo::read(void *buf, size_t siz)
 {
     size_t tmp = 0;

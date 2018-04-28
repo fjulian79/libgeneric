@@ -71,12 +71,21 @@ class Fifo
         size_t put(const void *c);
 
         /**
+         * Used to a single byte from the fifo to the provided buffer.
+         *
+         * @param buf       The target buffer to write to.
+         *
+         * @return          The number of bytes read.
+         */
+        size_t get(void *buf);
+
+        /**
          * Used to copy data from the fifo to the provided buffer.
          *
          * @param buf       The target buffer to write to.
          * @param siz       Number of bytes to read. Hence that less bytes then
-         *                  requested will be read from the fifo if less bytes are
-         *                  available.
+         *                  requested will be read from the fifo if less bytes
+         *                  are available.
          *
          * @return          The number of bytes read.
          */
@@ -84,16 +93,17 @@ class Fifo
 
         /**
          *
-         * @param buf       A pointer to a pointer to take the address of the fifo data
+         * @param buf       A pointer to a pointer to take the address of the
+         *                  fifo data
          *
-         * @return          The number of bytes which can be read from the fifo in a
-         *                  subsequent way.
+         * @return          The number of bytes which can be read from the fifo
+         *                  in a subsequent way.
          */
         size_t getReadBlock(void **buf);
 
         /**
-         * Used to free space in the fifo. The function will free not more bytes then
-         * provided, but maybe less if less bytes are used.
+         * Used to free space in the fifo. The function will free not more bytes
+         * then provided, but maybe less if less bytes are used.
          *
          * @param f         The fifo to use.
          * @param siz       Number of bytes to free.
