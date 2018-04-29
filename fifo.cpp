@@ -104,7 +104,7 @@ size_t Fifo::put(const void *c)
 
 size_t Fifo::get(void *buf)
 {
-    size_t siz = min(siz, getUsed());
+    size_t siz = min(1, getUsed());
 
     if (siz == 0)
         goto out;
@@ -116,7 +116,8 @@ size_t Fifo::get(void *buf)
     {
         Tail = 0;
     }
-    else if (Tail == Head)
+
+    if (Tail == Head)
     {
         Head = 0;
         Tail = 0;
