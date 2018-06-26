@@ -85,6 +85,18 @@
 #endif
 
 
+#ifndef map
+/**
+ * Used to map a value from a given range into another.
+ * Use with care, might have to improved.
+ */
+#define map(_val, _in_min, _in_max, _out_min, _out_max)         \
+                                                                \
+        ((_val - _in_min) * (_out_max - _out_min)               \
+         / (_in_max - _in_min) + _out_min)
+#endif
+
+
 #ifndef round
 /**
  * Used to round  _x next integer value.
