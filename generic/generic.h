@@ -194,4 +194,13 @@
 #endif
 
 
+#ifndef breakIfDiverse
+/**
+ * @brief Provides a easy exit from loops if the privided values differe.
+ */
+#define breakIfDiverse(_a, _b)                  \
+                                                \
+        if(_a != _b) break;
+#endif
+
 #endif /* MBR_COMMON_H_  */
