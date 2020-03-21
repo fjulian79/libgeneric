@@ -26,7 +26,7 @@
 
 #ifndef PI
 /**
- * Math constant PI
+ * @brief Math constant PI
  */
 #define PI                      3.1415926535897932384626433832795
 #endif
@@ -34,7 +34,7 @@
 
 #ifndef HALF_PI
 /**
- *
+ * @brief Defines PI/2 as this is often used in caluclations
  */
 #define HALF_PI                 1.5707963267948966192313216916398
 #endif
@@ -42,7 +42,7 @@
 
 #ifndef TWO_PI
 /**
- *
+ * @brief Defines 2*PI as this is often used in caluclations
  */
 #define TWO_PI                  6.283185307179586476925286766559
 #endif
@@ -50,7 +50,7 @@
 
 #ifndef DEG_TO_RAD
 /**
- * Used to convert degrees to radiant
+ * @brief Used to convert degrees to radiant
  */
 #define DEG_TO_RAD              0.017453292519943295769236907684886
 #endif
@@ -58,7 +58,7 @@
 
 #ifndef RAD_TO_DEG
 /**
- * Used to convert radiant to degrees
+ * @brief Used to convert radiant to degrees
  */
 #define RAD_TO_DEG              57.295779513082320876798154814105
 #endif
@@ -66,7 +66,7 @@
 
 #ifndef min
 /**
- * Returns the minimum of _a and _b.
+ * @brief Returns the minimum of _a and _b.
  */
 #define min(_a, _b)             ((_a) < (_b) ? (_a) : (_b))
 #endif
@@ -74,7 +74,7 @@
 
 #ifndef max
 /**
- * Returns the maximum of _a and _b.
+ * @brief Returns the maximum of _a and _b.
  */
 #define max(_a, _b)             (_a > _b ? _a : _b)
 #endif
@@ -82,7 +82,7 @@
 
 #ifndef abs
 /**
- * Returns the absolute value of _x
+ * @brief Returns the absolute value of _x
  */
 #define abs(_x)                 ((_x)<0 ? -(_x) : (_x))
 #endif
@@ -90,7 +90,7 @@
 
 #ifndef wrapInc
 /**
- * Used to increment _x by _n and wrap around to zero at _s.
+ * @brief Used to increment _x by _n and wrap around to zero at _s.
  */
 #define wrapInc(_x, _n, _s)     (((_x) + (_n)) % (_s))
 #endif
@@ -98,7 +98,7 @@
 
 #ifndef constrain
 /**
- * Used to limit  _x to become not higher than _h AND not lower then _l.
+ * @brief Used to limit  _x to become not higher than _h AND not lower then _l.
  */
 #define constrain(_x, _l, _h)                                           \
                                                                         \
@@ -108,8 +108,9 @@
 
 #ifndef map
 /**
- * Used to map a value from a given range into another.
- * Use with care, might have to improved.
+ * @brief Used to map a value from a given range into another.
+ * 
+ * WARNING: Use with care, might have to improved.
  */
 #define map(_val, _in_min, _in_max, _out_min, _out_max)         \
                                                                 \
@@ -120,7 +121,7 @@
 
 #ifndef round
 /**
- * Used to round  _x next integer value.
+ * @brief Used to round  _x next integer value.
  */
 #define round(_x)                                                       \
                                                                         \
@@ -130,7 +131,7 @@
 
 #ifndef radians
 /**
- * Used to convert degrees to radiants.
+ * @brief Used to convert degrees to radiants.
  */
 #define radians(_d)             ((_d) * DEG_TO_RAD)
 #endif
@@ -138,7 +139,7 @@
 
 #ifndef degrees
 /**
- * Used to convert radiants to degrees.
+ * @brief Used to convert radiants to degrees.
  */
 #define degrees(r)              ((_r) * RAD_TO_DEG)
 #endif
@@ -146,7 +147,7 @@
 
 #ifndef sq
 /**
- * Used to calculate the power of the given value.
+ * @brief Used to calculate the power of the given value.
  */
 #define sq(_x)                  ((_x) * (_x))
 #endif
@@ -154,7 +155,7 @@
 
 #ifndef arraysize
 /**
- * Used to get the size of a array.
+ * @brief Used to get the size of a array.
  */
 #define arraysize(_a)           (sizeof(_a)/sizeof(_a[0]))
 #endif
@@ -162,7 +163,7 @@
 
 #ifndef offsetof
 /**
- * Used to get the offset of a member in a structure.
+ * @brief Used to get the offset of a member in a structure.
  */
 #define offsetof(_st, _m)       ((size_t)&(((_st *)0)->_m))
 #endif
@@ -170,8 +171,8 @@
 
 #ifndef container_of
 /**
- * To get a pointer to the structure that contains _ptr.
-
+ * @brief To get a pointer to the structure that contains _ptr.
+ *
  * @param _ptr      Pointer to a member of a structure.
  * @param _type     Type of the desired structure pointer.
  * @param _member   Name of the member in _type to which _ptr is pointing to.
@@ -187,7 +188,7 @@
 
 #ifndef unused
 /**
- * Used su supress warnings of type:
+ * @brief Used su supress warnings of type:
  * warning: unused parameter '_x' [-Wunused-parameter]
  */
 #define unused(_x)              (void)(_x)
