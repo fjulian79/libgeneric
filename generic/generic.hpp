@@ -20,8 +20,8 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef MBR_COMMON_H_
-#define MBR_COMMON_H_
+#ifndef GENERIC_HPP_
+#define GENERIC_HPP_
 
 
 #ifndef PI
@@ -204,4 +204,4 @@
         if(_a != _b) break;
 #endif
 
-#endif /* MBR_COMMON_H_  */
+#endif /* GENERIC_HPP_ */

@@ -20,8 +20,8 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_FIFO_H_
-#define GENERIC_FIFO_H_
+#ifndef GENERIC_FIFO_HPP_
+#define GENERIC_FIFO_HPP_
 
 #include <stdint.h>
 #include <stddef.h>
@@ -148,4 +148,4 @@ class Fifo
         volatile size_t Tail;
 };
 
-#endif /* GENERIC_FIFO_H_ */
+#endif /* GENERIC_FIFO_HPP_ */
