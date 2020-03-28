@@ -20,8 +20,8 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#include "generic/generic.h"
-#include "generic/fifo.h"
+#include "generic/generic.hpp"
+#include "generic/fifo.hpp"
 
 #include <string.h>
 
