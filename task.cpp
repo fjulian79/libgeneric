@@ -20,53 +20,48 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#include "generic/crc8.hpp"
+#include "generic/task.hpp"
 
-crc8::crc8(uint8_t val, uint8_t poly) :
-      value(val)
-    , polynom(poly)
-
+Task_t::Task_t(uint32_t tick, bool state) :
+      ms(tick)
+    , last(0)
+    , enabled(state)
 {
 
 }
 
-crc8::~crc8(void)
+bool Task_t::isScheduled(uint32_t now)
 {
-
-}
-
-uint8_t crc8::calc(uint8_t data)
-{
-    value ^= data;
-    for (uint8_t i = 0; i < 8; i++)
+    if (!enabled || (now - last < ms))
     {
-        if (value & 0x80)
-        {
-            value = (value << 1) ^ polynom;
-        }
-        else
-        {
-            value <<= 1;
-        }
+        return false;
     }
 
-    return value;
-}
-        
-uint8_t crc8::calc(void* pData, size_t siz)
-{
-    uint8_t* tmp = (uint8_t*)pData;
-
-    while (siz > 0)
-    {
-        calc(*tmp++);
-        siz--;
-    }
-
-    return value;
+    last = now;
+    return true;
 }
 
-crc8::operator uint8_t() 
+uint32_t Task_t::getTick(void)
 {
-    return value;
+    return ms;
+}
+
+void Task_t::setTick(uint32_t tick)
+{
+    ms = tick;
+}
+
+uint32_t Task_t::getLastTick(void)
+{
+    return last;
+}
+
+bool Task_t::isEnabled()
+{
+    return enabled;
+}
+
+void Task_t::enable(bool val)
+{
+    enabled = val;
 }

@@ -2,7 +2,7 @@
  * libgeneric, a collection of usefool macros and classes to be used in any 
  * kind of C/C++ project.
  *
- * Copyright (C) 2019 Julian Friedrich
+ * Copyright (C) 2022 Julian Friedrich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
