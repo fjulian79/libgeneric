@@ -37,7 +37,7 @@ bool Task_t::isScheduled(uint32_t now)
         return false;
     }
 
-    last = now;
+    setLastTick(now);
     return true;
 }
 
@@ -54,6 +54,11 @@ void Task_t::setTick(uint32_t tick)
 uint32_t Task_t::getLastTick(void)
 {
     return last;
+}
+
+void Task_t::setLastTick(uint32_t ms)
+{
+    last = ms;
 }
 
 bool Task_t::isEnabled()

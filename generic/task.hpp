@@ -71,6 +71,15 @@ class Task_t
         uint32_t getLastTick(void);
 
         /**
+         * @brief Set the Last Tick value.
+         * 
+         * Comes in handy if a task has to be delayed or synced to some asyncronous events.
+         * 
+         * @param ms the tick value in ms to set as last tick time.
+         */
+        void setLastTick(uint32_t ms);
+
+        /**
          * @brief If the task is enabled or not.
          * 
          * @return true     If the task is enabled.
