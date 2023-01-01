@@ -20,10 +20,11 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "generic/generic.hpp"
 #include "generic/fifo.hpp"
-
-#include <string.h>
 
 Fifo::Fifo(void) :
       pData(0)
