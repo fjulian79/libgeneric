@@ -22,17 +22,17 @@
 
 #include "generic/task.hpp"
 
-Task_t::Task_t(uint32_t tick, bool state) :
-      ms(tick)
-    , last(0)
-    , enabled(state)
+Task::Task(uint32_t tick, bool state) :
+      TickInterval(tick)
+    , LastTick(0)
+    , Enabled(state)
 {
 
 }
 
-bool Task_t::isScheduled(uint32_t now)
+bool Task::isScheduled(uint32_t now)
 {
-    if (!enabled || (now - last < ms))
+    if (!Enabled || (now - LastTick < TickInterval))
     {
         return false;
     }
@@ -41,32 +41,32 @@ bool Task_t::isScheduled(uint32_t now)
     return true;
 }
 
-uint32_t Task_t::getTick(void)
+uint32_t Task::getTick(void)
 {
-    return ms;
+    return TickInterval;
 }
 
-void Task_t::setTick(uint32_t tick)
+void Task::setTick(uint32_t tick)
 {
-    ms = tick;
+    TickInterval = tick;
 }
 
-uint32_t Task_t::getLastTick(void)
+uint32_t Task::getLastTick(void)
 {
-    return last;
+    return LastTick;
 }
 
-void Task_t::setLastTick(uint32_t ms)
+void Task::setLastTick(uint32_t ms)
 {
-    last = ms;
+    LastTick = ms;
 }
 
-bool Task_t::isEnabled()
+bool Task::isEnabled()
 {
-    return enabled;
+    return Enabled;
 }
 
-void Task_t::enable(bool val)
+void Task::enable(bool val)
 {
-    enabled = val;
+    Enabled = val;
 }

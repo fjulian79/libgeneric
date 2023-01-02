@@ -27,37 +27,40 @@
 #include <stddef.h>
 
 /**
- * Task Data structure with all data elements needed.
+ * Implents all whats needed for a typical Arduino task which lives in the mail loop.
  */
-class Task_t
+class Task
 {
     public:
         /**
-         * @brief Construct a new Task_t object
+         * @brief Construct a new Task_t object.
          * 
-         * @param tick The Tasks tick intervall in ms
+         * @param tick The Tasks tick intervall in ms.
          * @param state If the taks shall be enabled or not. True by default.
          */
-        Task_t(uint32_t tick, bool state = true);
+        Task(uint32_t tick, bool state = true);
 
         /**
-         * @brief Checks if the task sahll be scheduled or not
+         * @brief Checks if the task shall be scheduled or not.
          * 
-         * @param now the current ticks in ms
+         * If yes, the function updates also the LastTick value to the value
+         * given by the "now" parameter. No need for any further house keeping.
+         *          
+         * @param now the current ticks in ms.
          * @return true     if it's time to schedule the task.
          * @return false    if it's NOT time to schedule the task.
          */
         bool isScheduled(uint32_t now);
 
         /**
-         * @brief Get the tick interval
+         * @brief Get the configured tick interval.
          * 
-         * @return uint32_t the tick interval in ms
+         * @return uint32_t the tick interval in ms.
          */
         uint32_t getTick(void);
 
         /**
-         * @brief Set the tick interval in ms
+         * @brief Set the tick interval.
          * 
          * @param tick new tick interval in ms.
          */
@@ -88,7 +91,7 @@ class Task_t
         bool isEnabled();
         
         /**
-         * @brief Sets the enavled state of the task;
+         * @brief Sets the enabled state of the task.
          * 
          * @param val   the new enabled state, true by default.
          */
@@ -96,9 +99,20 @@ class Task_t
 
     private:
 
-        uint32_t ms;
-        uint32_t last;
-        bool enabled;
+        /**
+         * @brief The tick intervall of the task.
+         */
+        uint32_t TickInterval;
+        
+        /**
+         * @brief The last tick of the task.
+         */
+        uint32_t LastTick;
+        
+        /**
+         * Stores if the task is enabled or not.
+         */
+        bool Enabled;
 };
 
 #endif /* GENERIC_TASK_HPP_ */
