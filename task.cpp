@@ -22,12 +22,18 @@
 
 #include "generic/task.hpp"
 
-Task::Task(uint32_t tick, bool state) :
+Task::Task(uint32_t tick, bool state, void (*fptr)(uint32_t)) :
       TickInterval(tick)
     , LastTick(0)
     , Enabled(state)
+    , FuncPtr(fptr)
 {
 
+}
+
+void Task::setTaskFunction(void (*fptr) (uint32_t))
+{
+    FuncPtr = fptr;
 }
 
 bool Task::isScheduled(uint32_t now)
@@ -69,4 +75,12 @@ bool Task::isEnabled()
 void Task::enable(bool val)
 {
     Enabled = val;
+}
+
+void Task::loop(uint32_t now)
+{
+    if (isScheduled(now) && FuncPtr)
+    {
+        FuncPtr(now);
+    }
 }

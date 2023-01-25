@@ -38,7 +38,15 @@ class Task
          * @param tick The Tasks tick intervall in ms.
          * @param state If the taks shall be enabled or not. True by default.
          */
-        Task(uint32_t tick, bool state = true);
+        Task(uint32_t tick, bool state = true, void (*fptr) (uint32_t) = 0);
+
+        /**
+         * @brief Sets the task function to be called by loop
+         * 
+         * The loop function will call the given function by passing the current
+         * tick in ms as uint32_t argument. 
+         */
+        void setTaskFunction(void (*fptr) (uint32_t));
 
         /**
          * @brief Checks if the task shall be scheduled or not.
@@ -97,6 +105,11 @@ class Task
          */
         void enable(bool val = true);
 
+        /**
+         * @brief Checks if the task is scheduled and calls the Task function if available
+         */
+        void loop(uint32_t now);
+
     private:
 
         /**
@@ -113,6 +126,8 @@ class Task
          * Stores if the task is enabled or not.
          */
         bool Enabled;
+
+        void (*FuncPtr) (uint32_t);
 };
 
 #endif /* GENERIC_TASK_HPP_ */
