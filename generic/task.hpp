@@ -27,7 +27,34 @@
 #include <stddef.h>
 
 /**
- * Implents all whats needed for a typical Arduino task which lives in the mail loop.
+ * @brief Used to run code periodically, e.g. in the main loop of an Arduino
+ * sketch.
+ *
+ * The task is scheduled once its interval elapsed since it has been scheduled
+ * the last time, the first time one interval after tick 0. If scheduled late,
+ * the next interval starts at the time it actually ran. The overflow of the
+ * tick, e.g. millis() after 49.7 days, is handled.
+ *
+ *  Task ledTask(500);
+ *
+ *  void loop()
+ *  {
+ *      if (ledTask.isScheduled(millis()))
+ *      {
+ *          digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+ *      }
+ *  }
+ *
+ * Alternatively a task function can be given, it is called by loop():
+ *
+ *  void toggleLed(uint32_t now) { ... }
+ *
+ *  Task ledTask(500, true, toggleLed);
+ *
+ *  void loop()
+ *  {
+ *      ledTask.loop(millis());
+ *  }
  */
 class Task
 {

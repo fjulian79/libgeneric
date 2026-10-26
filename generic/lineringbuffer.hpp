@@ -40,6 +40,37 @@
  * append(), as it might remove old lines.
  *
  * Not safe for concurrent use, as append() modifies both ends of the buffer.
+ *
+ *  char logData[1024];
+ *  LineRingBuffer log(logData, sizeof(logData));
+ *  char line[128];
+ *
+ *  log.append("WiFi: Connected");
+ *  log.append("NTP: Time synchronized");
+ *
+ *  for (size_t pos = log.first(); pos != LineRingBuffer::npos; pos = log.next(pos))
+ *  {
+ *      if (log.read(pos, line, sizeof(line)))
+ *          Serial.println(line);
+ *  }
+ *
+ * To keep the lines across a reset, place the buffer and the state in memory
+ * which is not initialized at startup, e.g. RTC_NOINIT_ATTR on an ESP32, and
+ * restore the state at startup. setState() only does a basic plausibility
+ * check, so use an additional magic value to detect a power on:
+ *
+ *  RTC_NOINIT_ATTR char logData[1024];
+ *  RTC_NOINIT_ATTR RingBuffer::State logState;
+ *  RTC_NOINIT_ATTR uint32_t logMagic;
+ *
+ *  if (logMagic != LOG_MAGIC || !log.setState(logState))
+ *  {
+ *      log.clear();
+ *      logMagic = LOG_MAGIC;
+ *  }
+ *  ...
+ *  log.append("...");
+ *  logState = log.getState();              // after each modification
  */
 class LineRingBuffer : public RingBuffer
 {

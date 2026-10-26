@@ -31,8 +31,33 @@
 /**
  * @brief Byte FiFo operating on a buffer provided by the user.
  *
- * Safe to be used by one producer and one consumer concurrently, e.g. an 
+ * Safe to be used by one producer and one consumer concurrently, e.g. an
  * interrupt and the main loop, see RingBuffer for details.
+ *
+ *  char rxData[64];
+ *  Fifo rxFifo(rxData, sizeof(rxData));
+ *
+ *  void UART_IRQHandler(void)              // producer
+ *  {
+ *      char c = UART->DR;
+ *      rxFifo.put(&c);                     // dropped if the fifo is full
+ *  }
+ *
+ *  void loop()                             // consumer
+ *  {
+ *      char c;
+ *      while (rxFifo.get(&c))
+ *          process(c);
+ *  }
+ *
+ * To transmit via DMA, getReadBlock() provides the oldest data without copying
+ * it and free() releases it once it has been transferred:
+ *
+ *  void *data;
+ *  size_t len = txFifo.getReadBlock(&data);
+ *  startDma(data, len);
+ *  ...
+ *  txFifo.free(len);                       // in the DMA complete interrupt
  */
 class Fifo : public RingBuffer
 {

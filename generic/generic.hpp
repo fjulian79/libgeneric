@@ -67,6 +67,9 @@
 #ifndef min
 /**
  * @brief Returns the minimum of _a and _b.
+ *
+ * The arguments are evaluated more than once, don't pass expressions with
+ * side effects like min(i++, 10).
  */
 #define min(_a, _b)             ((_a) < (_b) ? (_a) : (_b))
 #endif
@@ -75,6 +78,9 @@
 #ifndef max
 /**
  * @brief Returns the maximum of _a and _b.
+ *
+ * The arguments are evaluated more than once, don't pass expressions with
+ * side effects like max(i++, 0).
  */
 #define max(_a, _b)             ((_a) > (_b) ? (_a) : (_b))
 #endif

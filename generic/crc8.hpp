@@ -115,7 +115,13 @@ static const crc8_param_t CRC8_WCDMA        = {0x00, CRC8_POLY_WCDMA,    true,  
  *     printf("Test CRC: 0x%02x\n", crc.calc(&data[0], strlen(data)));    
  *     printf("Test CRC: 0x%02x\n", (uint8_t)crc);
  *  };
- * 
+ *
+ * The default parameters calculate CRC-8/SMBUS. For other well known
+ * algorithms use the parameter sets, e.g. for Dallas/Maxim 1-Wire devices:
+ *
+ *     crc8 crc(CRC8_MAXIM);
+ *     uint8_t check = crc.calc(&rom[0], 7);   // compare with rom[7]
+ *
  * This class is tested against the check values of the CRC catalogue, see the
  * unit tests.
  */

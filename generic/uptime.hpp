@@ -28,6 +28,24 @@
 /**
  * Implements simple up time management without rollover within a typical
  * humans livetime.
+ *
+ * The uptime is kept as 64 bit milliseconds counter, so it keeps counting
+ * across the overflow of millis() after 49.7 days, as long as loop() is called
+ * at least once within this period.
+ *
+ *  UpTime upTime;
+ *
+ *  void setup()
+ *  {
+ *      upTime.begin();
+ *  }
+ *
+ *  void loop()
+ *  {
+ *      upTime.loop();
+ *      ...
+ *      Serial.println(upTime.toString());      // e.g. "1 days, 01:02:03.004"
+ *  }
  */
 class UpTime
 {
