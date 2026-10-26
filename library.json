@@ -1,13 +1,26 @@
 {
     "name": "libgeneric",
     "version": "2.0.0",
-    "keywords": "",
-    "description": "A collection of generic and platform independent C++ code for micro controllers.",
+    "description": "A collection of generic C++ code for Arduino based micro controller projects.",
+    "keywords": "arduino, embedded, ringbuffer, ring buffer, fifo, crc8, crc, task, scheduler, uptime",
+    "license": "GPL-3.0",
     "repository":
     {
       "type": "git",
       "url": "https://github.com/fjulian79/libgeneric.git"
     },
-    "frameworks": "*",
-    "platforms": "*"
+    "authors":
+    [
+      {
+        "name": "Julian Friedrich",
+        "url": "https://github.com/fjulian79",
+        "maintainer": true
+      }
+    ],
+    "frameworks": "arduino",
+    "platforms": ["espressif32", "raspberrypi"],
+    "export":
+    {
+      "exclude": ["test", "platformio.ini", ".gitignore"]
+    }
   }

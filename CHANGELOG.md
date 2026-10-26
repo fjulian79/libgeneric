@@ -3,12 +3,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog.
 
-## [v2.0.0] - unreleased
+## [v2.0.0] - 2026-10-26
 This version is not compatible with v1.x, see the migration section of the README.
 ### Changed
 - Replaced the macros `constrain`, `map`, `sq`, `wrapInc`, `radians`, `degrees` and the constants `PI`, `HALF_PI`, `TWO_PI` by `constexpr` functions and constants within the namespace `generic`: `clamp()`, `mapRange()`, `square()`, `wrapInc()`, `toRadians()`, `toDegrees()`, `pi`, `halfPi` and `twoPi`. They keep the type of the first argument, e.g. a `float` is not promoted to `double`, and evaluate each argument once.
 - `generic.hpp` includes `<stddef.h>` and `<type_traits>`.
 - The library requires at least C++11.
+- The library is declared for the Arduino framework on ESP32 and Raspberry Pi Pico, as `UpTime` needs Arduino.
 ### Removed
 - Removed the macros `min`, `max`, `abs`, `round` and `offsetof`, use the standard library instead.
 - Removed the macros `DEG_TO_RAD`, `RAD_TO_DEG` and `breakIfDiverse`.
@@ -16,6 +17,8 @@ This version is not compatible with v1.x, see the migration section of the READM
 - Fixed `generic.hpp` breaking `<stdlib.h>`, `<math.h>` and `<algorithm>` when included before them, and colliding with the macros defined by Arduino.
 ### Added
 - Added tests verifying that `generic.hpp` neither collides with the standard library nor with Arduino.
+- Added examples for `Task` and `UpTime`, `Fifo`, `LineRingBuffer` and `crc8`.
+- Added license, authors and keywords to `library.json`, the tests are excluded from the package.
 
 ## [v1.3.0] - 2026-10-26
 ### Added

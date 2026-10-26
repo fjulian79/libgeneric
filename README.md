@@ -1,5 +1,5 @@
 # libgeneric
-A collection of generic and platform independent C++ code for micro controllers. 
+A collection of generic C++ code for Arduino based micro controller projects. 
 
 See [CHANGELOG.md](CHANGELOG.md) for the changes of each version.
 
@@ -12,7 +12,12 @@ lib_deps = https://github.com/fjulian79/libgeneric.git#v2.0.0
 ```
 
 Pin a version, v2.0.0 is not compatible with v1.x, see 
-[Migration from v1.x](#migration-from-v1x). Requires at least C++11.
+[Migration from v1.x](#migration-from-v1x). Requires the Arduino framework and
+at least C++11, tested on ESP32 and on the Raspberry Pi Pico using the core of
+Earle Philhower.
+
+The [examples](examples) show the typical use of `Task` and `UpTime`, `Fifo`
+between an interrupt and the main loop, `LineRingBuffer` as log and `crc8`.
 
 ## Content
 
@@ -24,7 +29,7 @@ Pin a version, v2.0.0 is not compatible with v1.x, see
 | `generic/lineringbuffer.hpp` | `LineRingBuffer`, stores lines of text, e.g. for logs or a history |
 | `generic/crc8.hpp` | `crc8`, CRC8 calculation including parameter sets of well known algorithms |
 | `generic/task.hpp` | `Task`, runs code periodically based on a millisecond tick |
-| `generic/uptime.hpp` | `UpTime`, 64 bit uptime and a printable uptime string, needs Arduino |
+| `generic/uptime.hpp` | `UpTime`, 64 bit uptime and a printable uptime string |
 
 ### Things to know
 
