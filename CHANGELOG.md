@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog.
 
-## [v1.3.0] - unreleased
+## [v1.3.0] - 2026-10-26
 ### Added
 - Added the `RingBuffer` base class, using indices and providing a non destructive `peek()` as well as saving and restoring its state.
 - Added `LineRingBuffer` to store lines of text, e.g. for logs or a history.
