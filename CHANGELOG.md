@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog.
 
+## [v2.2.0] - 2026-10-27
+### Added
+- Added `SysLog`, a system log with timestamps and syslog severities, which can be kept across a reset.
+- Added `EventLog`, a log of events of one kind with timestamps, which can print new events live.
+- Added `timeStampMillis()` and `timeStampSystem()` to print timestamps, e.g. for the logs.
+- Added `BoundedWriter`, a `Print` writing into a fixed buffer which can not overflow.
+- Added tests for the new classes and the example `syslog`.
+### Changed
+- Replaced the include guards by `#pragma once`.
+- The README shows how to use the library from the PlatformIO registry.
+
 ## [v2.1.0] - 2026-10-26
 ### Added
 - Added `UpTime::getMilliseconds()` to get the uptime as number, e.g. for timestamps.

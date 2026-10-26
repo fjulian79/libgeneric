@@ -8,16 +8,16 @@ See [CHANGELOG.md](CHANGELOG.md) for the changes of each version.
 Add the library to the `lib_deps` of your `platformio.ini`:
 
 ```
-lib_deps = https://github.com/fjulian79/libgeneric.git#v2.0.0
+lib_deps = fjulian79/libgeneric@^2.2.0
 ```
 
-Pin a version, v2.0.0 is not compatible with v1.x, see 
-[Migration from v1.x](#migration-from-v1x). Requires the Arduino framework and
-at least C++11, tested on ESP32 and on the Raspberry Pi Pico using the core of
-Earle Philhower.
+v2.x is not compatible with v1.x, see [Migration from v1.x](#migration-from-v1x).
+Requires the Arduino framework and at least C++11, tested on ESP32 and on the
+Raspberry Pi Pico using the core of Earle Philhower.
 
 The [examples](examples) show the typical use of `Task` and `UpTime`, `Fifo`
-between an interrupt and the main loop, `LineRingBuffer` as log and `crc8`.
+between an interrupt and the main loop, `LineRingBuffer` as log, `SysLog` and
+`EventLog` and `crc8`.
 
 ## Content
 
@@ -30,6 +30,10 @@ between an interrupt and the main loop, `LineRingBuffer` as log and `crc8`.
 | `generic/crc8.hpp` | `crc8`, CRC8 calculation including parameter sets of well known algorithms |
 | `generic/task.hpp` | `Task`, runs code periodically based on a millisecond tick |
 | `generic/uptime.hpp` | `UpTime`, 64 bit uptime in milliseconds and a printable uptime string |
+| `generic/syslog.hpp` | `SysLog`, system log with timestamps and syslog severities, optionally kept across a reset |
+| `generic/eventlog.hpp` | `EventLog`, log of events of one kind with timestamps, e.g. received codes, optionally printed live |
+| `generic/timestamp.hpp` | `timeStampMillis()` and `timeStampSystem()`, timestamps for the logs or any `Print` |
+| `generic/boundedwriter.hpp` | `BoundedWriter`, a `Print` writing into a fixed buffer, which can not overflow |
 
 ### Things to know
 
@@ -53,6 +57,24 @@ between an interrupt and the main loop, `LineRingBuffer` as log and `crc8`.
   overflow of `millis()` after 49.7 days is handled.
 - **UpTime** keeps counting across the overflow of `millis()`, as long as 
   `loop()` is called at least once within 49.7 days.
+- **SysLog** stores messages up to the log level, info by default, and prints
+  the ones up to the console level, err by default, to a console, Serial by
+  default. The memory is provided by the user as `SysLogMemory<N>`, placed in
+  memory which is not initialized on startup it is kept across a reset, e.g.
+  by a watchdog. Without memory messages are only printed. Messages longer
+  than 127 characters are truncated. Not safe for concurrent use.
+- **EventLog** works like SysLog without severities. New events can be printed
+  to a monitor as they occur, e.g. to follow received codes like `tail -f`.
+- **Timestamps** of both logs are printed by a function set by
+  `setTimeStamp()`, without one there is no timestamp. `timeStampMillis()`
+  works everywhere, but wraps after 49.7 days. `timeStampSystem()` is only
+  available on ESP32 and Raspberry Pi Pico, it prints the time since boot
+  starting at 1970-01-01 until the time is set, e.g. by NTP, the local time
+  afterwards. Functions not used are not linked, e.g. the time zone handling.
+- **BoundedWriter** drops what does not fit into its buffer and tells so by
+  `overflowed()`, it neither writes behind the end nor uses the heap. The logs
+  use it to hand the space of the timestamp to the timestamp function, but it
+  is useful on its own, e.g. to compose text without `String`.
 
 ## Migration from v1.x
 
@@ -86,4 +108,6 @@ AddressSanitizer and UndefinedBehaviorSanitizer:
 pio test -e native
 ```
 
-`UpTime` is tested using a minimal Arduino replacement in `test/support`.
+`UpTime`, the logs, `timeStampMillis()` and `BoundedWriter` are tested using a
+minimal Arduino replacement in `test/support`. `timeStampSystem()` depends on
+the system time of the platform and is not tested on the host.
