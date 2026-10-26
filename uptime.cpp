@@ -40,7 +40,7 @@ String UpTime::toString(void)
     uint32_t days = (uint32_t)(Milliseconds / 86400000);
     char tmp[32];
 
-    snprintf(tmp, sizeof(tmp), "%lu days, %02u:%02u:%02u.%03u", days, hrs, min, sec, ms);
+    snprintf(tmp, sizeof(tmp), "%lu days, %02u:%02u:%02u.%03u", (unsigned long) days, hrs, min, sec, ms);
 
     return (String)(tmp);
 }

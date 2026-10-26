@@ -18,8 +18,10 @@ The format is based on Keep a Changelog.
 - Fixed a race condition in `Fifo`, the consumer reset the write index when the fifo became empty, which could drop data written concurrently by the producer.
 - Fixed `CRC8_POLY_DARC`, `EBU`, `ITU`, `MAXIM`, `ROHC` and `WCDMA` not resulting in the standard CRC, use the new parameter sets.
 - Fixed assigning a value to `crc8` resetting its parameters to the defaults.
-- Fixed missing parentheses in `max()`.
+- Fixed missing parentheses in `max()` and `map()`.
+- Fixed `degrees()` using an undefined argument name.
 - Fixed the millisecond format in `UpTime::toString()`, it printed 4 digits.
+- Fixed the format of the days in `UpTime::toString()` on platforms where `uint32_t` is not an `unsigned long`.
 
 ## [v1.2.0] - 2023-01-25
 ### Added

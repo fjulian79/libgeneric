@@ -120,8 +120,8 @@
  */
 #define map(_val, _in_min, _in_max, _out_min, _out_max)         \
                                                                 \
-        ((_val - _in_min) * (_out_max - _out_min)               \
-         / (_in_max - _in_min) + _out_min)
+        (((_val) - (_in_min)) * ((_out_max) - (_out_min))       \
+         / ((_in_max) - (_in_min)) + (_out_min))
 #endif
 
 
@@ -147,7 +147,7 @@
 /**
  * @brief Used to convert radiants to degrees.
  */
-#define degrees(r)              ((_r) * RAD_TO_DEG)
+#define degrees(_r)              ((_r) * RAD_TO_DEG)
 #endif
 
 
