@@ -76,7 +76,7 @@
 /**
  * @brief Returns the maximum of _a and _b.
  */
-#define max(_a, _b)             (_a > _b ? _a : _b)
+#define max(_a, _b)             ((_a) > (_b) ? (_a) : (_b))
 #endif
 
 

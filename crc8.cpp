@@ -22,12 +22,38 @@
 
 #include "generic/crc8.hpp"
 
-crc8::crc8(uint8_t val, uint8_t poly) :
-      value(val)
-    , polynom(poly)
-
+/**
+ * @brief Reverses the bit order of the given byte.
+ */
+static uint8_t reflect(uint8_t val)
 {
+    uint8_t ret = 0;
 
+    for (uint8_t i = 0; i < 8; i++)
+    {
+        ret = (ret << 1) | (val & 0x01);
+        val >>= 1;
+    }
+
+    return ret;
+}
+
+crc8::crc8(uint8_t val, uint8_t poly, bool reflected, uint8_t xorout) :
+      value(0)
+    , polynom(reflected ? reflect(poly) : poly)
+    , reflected(reflected)
+    , xorout(xorout)
+{
+    *this = val;
+}
+
+crc8::crc8(const crc8_param_t &param) :
+      value(0)
+    , polynom(param.reflected ? reflect(param.poly) : param.poly)
+    , reflected(param.reflected)
+    , xorout(param.xorout)
+{
+    *this = param.init;
 }
 
 crc8::~crc8(void)
@@ -40,7 +66,13 @@ uint8_t crc8::calc(uint8_t data)
     value ^= data;
     for (uint8_t i = 0; i < 8; i++)
     {
-        if (value & 0x80)
+        if (reflected)
+        {
+            /* Reflected algorithm: shift right using the reflected polynom,
+             * so neither the input bytes nor the result need to be reflected */
+            value = (value & 0x01) ? (value >> 1) ^ polynom : value >> 1;
+        }
+        else if (value & 0x80)
         {
             value = (value << 1) ^ polynom;
         }
@@ -50,7 +82,7 @@ uint8_t crc8::calc(uint8_t data)
         }
     }
 
-    return value;
+    return value ^ xorout;
 }
         
 uint8_t crc8::calc(void* pData, size_t siz)
@@ -63,10 +95,17 @@ uint8_t crc8::calc(void* pData, size_t siz)
         siz--;
     }
 
-    return value;
+    return value ^ xorout;
 }
 
-crc8::operator uint8_t() 
+crc8::operator uint8_t() const
 {
-    return value;
+    return value ^ xorout;
+}
+
+crc8 &crc8::operator=(uint8_t val)
+{
+    /* The init value is defined for the not reflected register */
+    value = reflected ? reflect(val) : val;
+    return *this;
 }
