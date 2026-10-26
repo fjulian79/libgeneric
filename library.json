@@ -1,6 +1,6 @@
 {
     "name": "libgeneric",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "A collection of generic C++ code for Arduino based micro controller projects.",
     "keywords": "arduino, embedded, ringbuffer, ring buffer, fifo, crc8, crc, task, scheduler, uptime",
     "license": "GPL-3.0",

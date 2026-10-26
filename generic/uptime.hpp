@@ -81,6 +81,13 @@ class UpTime
         void loop(void);
 
         /**
+         * Used to get the uptime, as updated by the last call of loop().
+         *
+         * @return The current uptime in milliseconds.
+         */
+        uint64_t getMilliseconds(void) const;
+
+        /**
          * Used to get a Linux style uptime string.
          * 
          * @return The current uptime as printable text.

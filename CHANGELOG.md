@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog.
 
+## [v2.1.0] - 2026-10-26
+### Added
+- Added `UpTime::getMilliseconds()` to get the uptime as number, e.g. for timestamps.
+
 ## [v2.0.0] - 2026-10-26
 This version is not compatible with v1.x, see the migration section of the README.
 ### Changed

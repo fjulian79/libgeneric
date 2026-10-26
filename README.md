@@ -29,7 +29,7 @@ between an interrupt and the main loop, `LineRingBuffer` as log and `crc8`.
 | `generic/lineringbuffer.hpp` | `LineRingBuffer`, stores lines of text, e.g. for logs or a history |
 | `generic/crc8.hpp` | `crc8`, CRC8 calculation including parameter sets of well known algorithms |
 | `generic/task.hpp` | `Task`, runs code periodically based on a millisecond tick |
-| `generic/uptime.hpp` | `UpTime`, 64 bit uptime and a printable uptime string |
+| `generic/uptime.hpp` | `UpTime`, 64 bit uptime in milliseconds and a printable uptime string |
 
 ### Things to know
 

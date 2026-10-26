@@ -31,6 +31,11 @@ void UpTime::loop(void)
     Milliseconds += elapsed > 0 ? elapsed : 0;
 }
 
+uint64_t UpTime::getMilliseconds(void) const
+{
+    return Milliseconds;
+}
+
 String UpTime::toString(void)
 {
     uint16_t ms   = (uint16_t)(Milliseconds % 1000);
