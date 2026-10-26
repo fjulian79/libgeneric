@@ -1,5 +1,5 @@
 # libgeneric
-A collection of generic and platform independent code. 
+A collection of generic and platform independent C++ code for micro controllers. 
 
 See [CHANGELOG.md](CHANGELOG.md) for the changes of each version.
 
@@ -8,14 +8,17 @@ See [CHANGELOG.md](CHANGELOG.md) for the changes of each version.
 Add the library to the `lib_deps` of your `platformio.ini`:
 
 ```
-lib_deps = https://github.com/fjulian79/libgeneric.git
+lib_deps = https://github.com/fjulian79/libgeneric.git#v2.0.0
 ```
+
+Pin a version, v2.0.0 is not compatible with v1.x, see 
+[Migration from v1.x](#migration-from-v1x). Requires at least C++11.
 
 ## Content
 
 | Header | Content |
 |---|---|
-| `generic/generic.hpp` | Macros like `min`, `max`, `constrain`, `map`, `arraysize`, `container_of` and math constants |
+| `generic/generic.hpp` | `constexpr` helpers like `generic::clamp()`, `generic::mapRange()`, `generic::toRadians()`, the constant `generic::pi` and the macros `arraysize`, `container_of` and `unused` |
 | `generic/ringbuffer.hpp` | `RingBuffer`, byte ring buffer on a buffer provided by the user |
 | `generic/fifo.hpp` | `Fifo`, byte FiFo based on `RingBuffer` |
 | `generic/lineringbuffer.hpp` | `LineRingBuffer`, stores lines of text, e.g. for logs or a history |
@@ -25,8 +28,11 @@ lib_deps = https://github.com/fjulian79/libgeneric.git
 
 ### Things to know
 
-- **Macros evaluate their arguments more than once.** Don't pass expressions 
-  with side effects, e.g. `max(i++, 0)` increments `i` twice.
+- **generic.hpp** keeps the type of the first argument, e.g. 
+  `generic::clamp(myUint8, 0, 100)` returns an `uint8_t` and 
+  `generic::toRadians(1.0f)` calculates in `float`, not in `double`. Its names
+  differ from the macros defined by Arduino like `constrain()` or `PI`, so 
+  both can be used together.
 - **Fifo and RingBuffer** can be used by one producer and one consumer 
   concurrently, e.g. an interrupt and the main loop, without locking. One byte
   of the buffer is always kept free for this.
@@ -42,6 +48,29 @@ lib_deps = https://github.com/fjulian79/libgeneric.git
   overflow of `millis()` after 49.7 days is handled.
 - **UpTime** keeps counting across the overflow of `millis()`, as long as 
   `loop()` is called at least once within 49.7 days.
+
+## Migration from v1.x
+
+v2.0.0 removed the macros of `generic.hpp` which collided with the standard 
+library or with Arduino:
+
+| v1.x macro | Replacement |
+|---|---|
+| `min(a, b)`, `max(a, b)` | `std::min(a, b)`, `std::max(a, b)` from `<algorithm>` |
+| `abs(x)` | `std::abs(x)` from `<cstdlib>` |
+| `round(x)` | `std::lround(x)` from `<cmath>`, returns a `long` like the macro |
+| `offsetof(st, m)` | `offsetof(st, m)` from `<stddef.h>`, included by `generic.hpp` |
+| `constrain(x, l, h)` | `generic::clamp(x, l, h)` |
+| `map(x, inMin, inMax, outMin, outMax)` | `generic::mapRange(x, inMin, inMax, outMin, outMax)` |
+| `sq(x)` | `generic::square(x)` |
+| `wrapInc(x, n, s)` | `generic::wrapInc(x, n, s)` |
+| `radians(d)`, `degrees(r)` | `generic::toRadians(d)`, `generic::toDegrees(r)`, floating point only |
+| `PI`, `HALF_PI`, `TWO_PI` | `generic::pi`, `generic::halfPi`, `generic::twoPi` |
+| `DEG_TO_RAD`, `RAD_TO_DEG` | `generic::toRadians()`, `generic::toDegrees()` |
+| `breakIfDiverse(a, b)` | `if (a != b) break;` |
+
+In Arduino projects the macros `constrain()`, `map()`, `sq()`, `radians()`,
+`degrees()`, `PI` etc. are still provided by `Arduino.h`.
 
 ## Tests
 

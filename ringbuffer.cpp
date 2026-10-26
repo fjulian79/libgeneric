@@ -22,7 +22,7 @@
 
 #include <string.h>
 
-#include "generic/generic.hpp"
+#include <algorithm>
 #include "generic/ringbuffer.hpp"
 
 RingBuffer::RingBuffer(void) :
@@ -83,11 +83,11 @@ size_t RingBuffer::write(const void *buf, size_t siz)
     size_t head = Head;
     size_t part = 0;
 
-    siz = min(siz, getFree());
+    siz = std::min(siz, getFree());
     if (siz == 0)
         return 0;
 
-    part = min(siz, Size - head);
+    part = std::min(siz, Size - head);
     memcpy(&pData[head], buf, part);
     memcpy(pData, ((const char *)buf) + part, siz - part);
 
@@ -113,9 +113,9 @@ size_t RingBuffer::peek(void *buf, size_t siz, size_t offset) const
     if (offset >= used)
         return 0;
 
-    siz = min(siz, used - offset);
+    siz = std::min(siz, used - offset);
     pos = (Tail + offset) % Size;
-    part = min(siz, Size - pos);
+    part = std::min(siz, Size - pos);
     memcpy(buf, &pData[pos], part);
     memcpy(((char *)buf) + part, pData, siz - part);
 
@@ -131,12 +131,12 @@ size_t RingBuffer::getReadBlock(void **buf) const
         return 0;
 
     *buf = &pData[tail];
-    return min(used, Size - tail);
+    return std::min(used, Size - tail);
 }
 
 void RingBuffer::free(size_t siz)
 {
-    siz = min(siz, getUsed());
+    siz = std::min(siz, getUsed());
     if (siz == 0)
         return;
 

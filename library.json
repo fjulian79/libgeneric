@@ -1,8 +1,8 @@
 {
     "name": "libgeneric",
-    "version": "1.3.0",
+    "version": "2.0.0",
     "keywords": "",
-    "description": "A collection of generic and platform independent code.",
+    "description": "A collection of generic and platform independent C++ code for micro controllers.",
     "repository":
     {
       "type": "git",
