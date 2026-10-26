@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_UPTIME_HPP_
-#define GENERIC_UPTIME_HPP_
+#pragma once
 
 #include <Arduino.h>
 
@@ -106,5 +105,3 @@ class UpTime
          */
         uint32_t LastTick;
 };
-
-#endif /* GENERIC_UPTIME_HPP_ */

@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_TASK_HPP_
-#define GENERIC_TASK_HPP_
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -156,5 +155,3 @@ class Task
 
         void (*FuncPtr) (uint32_t);
 };
-
-#endif /* GENERIC_TASK_HPP_ */

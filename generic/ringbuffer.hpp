@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_RINGBUFFER_HPP_
-#define GENERIC_RINGBUFFER_HPP_
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -196,5 +195,3 @@ class RingBuffer
          */
         volatile size_t Tail;
 };
-
-#endif /* GENERIC_RINGBUFFER_HPP_ */

@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_TIMESTAMP_HPP_
-#define GENERIC_TIMESTAMP_HPP_
+#pragma once
 
 #include <Arduino.h>
 
@@ -63,5 +62,3 @@ void timeStampMillis(Print &out);
  */
 void timeStampSystem(Print &out);
 #endif
-
-#endif /* GENERIC_TIMESTAMP_HPP_ */

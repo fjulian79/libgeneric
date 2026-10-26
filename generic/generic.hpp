@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_HPP_
-#define GENERIC_HPP_
+#pragma once
 
 #include <stddef.h>
 #include <type_traits>
@@ -178,5 +177,3 @@ constexpr T toDegrees(T rad)
 }
 
 } /* namespace generic */
-
-#endif /* GENERIC_HPP_ */

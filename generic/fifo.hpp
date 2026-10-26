@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_FIFO_HPP_
-#define GENERIC_FIFO_HPP_
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -85,5 +84,3 @@ class Fifo : public RingBuffer
          */
         size_t get(void *buf);
 };
-
-#endif /* GENERIC_FIFO_HPP_ */

@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_SYSLOG_HPP_
-#define GENERIC_SYSLOG_HPP_
+#pragma once
 
 #include <stdarg.h>
 
@@ -321,5 +320,3 @@ class SysLog
          */
         Severity ConsoleLevel;
 };
-
-#endif /* GENERIC_SYSLOG_HPP_ */

@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef CRC8_HPP_
-#define CRC8_HPP_
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -221,5 +220,3 @@ class crc8
          */
         uint8_t xorout;
 };
-
-#endif /* CRC8_HPP_ */

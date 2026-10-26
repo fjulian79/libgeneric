@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_LINERINGBUFFER_HPP_
-#define GENERIC_LINERINGBUFFER_HPP_
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -172,5 +171,3 @@ class LineRingBuffer : public RingBuffer
         using RingBuffer::free;
         using RingBuffer::getReadBlock;
 };
-
-#endif /* GENERIC_LINERINGBUFFER_HPP_ */

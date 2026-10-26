@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_EVENTLOG_HPP_
-#define GENERIC_EVENTLOG_HPP_
+#pragma once
 
 #include <Arduino.h>
 
@@ -150,5 +149,3 @@ class EventLog
          */
         Print *Monitor;
 };
-
-#endif /* GENERIC_EVENTLOG_HPP_ */

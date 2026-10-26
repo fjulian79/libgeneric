@@ -27,8 +27,7 @@
  * Serial is collected in Serial.Output.
  */
 
-#ifndef TEST_SUPPORT_ARDUINO_H_
-#define TEST_SUPPORT_ARDUINO_H_
+#pragma once
 
 #include <stdint.h>
 #include <stdio.h>
@@ -129,5 +128,3 @@ inline uint32_t millis(void)
 {
     return testMillisValue();
 }
-
-#endif /* TEST_SUPPORT_ARDUINO_H_ */

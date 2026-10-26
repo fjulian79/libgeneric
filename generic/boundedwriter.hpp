@@ -20,8 +20,7 @@
  * You can file issues at https://github.com/fjulian79/libgeneric
  */
 
-#ifndef GENERIC_BOUNDEDWRITER_HPP_
-#define GENERIC_BOUNDEDWRITER_HPP_
+#pragma once
 
 #include <Arduino.h>
 
@@ -136,5 +135,3 @@ class BoundedWriter : public Print
          */
         bool Overflow;
 };
-
-#endif /* GENERIC_BOUNDEDWRITER_HPP_ */
